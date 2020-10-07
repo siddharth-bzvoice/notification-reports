@@ -1,0 +1,34 @@
+logging:
+  level: INFO
+  loggers:
+    com.employee.webservice: DEBUG
+server:
+  applicationConnectors:
+    - type: http
+      port: 8085
+  adminConnectors:
+    - type: http
+      port: 8081
+database:
+  driverClass: com.mysql.cj.jdbc.Driver
+  url: jdbc:mysql://localhost:3307/notification-reports-db
+  user: root
+  password: root
+  maxWaitForConnection: 1s
+  validationQuery: "SELECT 1"
+  validationQueryTimeout: 3s
+  minSize: 8
+  maxSize: 32
+  checkConnectionWhileIdle: false
+  evictionInterval: 10s
+  minIdleTime: 1 minute
+  checkConnectionOnBorrow: true
+  properties:
+    hibernate.dialect: org.hibernate.dialect.MySQL57Dialect
+    hibernate.hbm2ddl.auto: create
+    charSet: UTF-8
+    hibernate.show_sql: true
+    hibernate.generate_statistics: false
+    hibernate.current_session_context_class: thread
+swagger:
+  resourcePackage: com.bazaarvoice.resources
