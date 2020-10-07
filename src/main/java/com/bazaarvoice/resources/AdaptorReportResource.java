@@ -2,15 +2,11 @@ package com.bazaarvoice.resources;
 
 import com.bazaarvoice.db.AdaptorReportDao;
 import com.bazaarvoice.models.AdaptorReport;
+import com.bazaarvoice.service.ExcelManager;
 import com.codahale.metrics.annotation.Timed;
 import io.dropwizard.hibernate.UnitOfWork;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -60,36 +56,15 @@ public class AdaptorReportResource {
     }
 
     @GET
+    @UnitOfWork
+    @Timed
     @Path("/downloadxls")
     @Produces("application/vnd.ms-excel")
-    @UnitOfWork
+    @ApiOperation("Download adaptor reports as excel")
     public Response downloadXLS() throws IOException {
 
-        // This code need to be refactored to add column header
-        // Cell no's are hardcoded here which will be a loop
-        // This code we will put in service utils/package
-        // The download resource need to be applied to other models
-
         List<AdaptorReport> adaptorReportList =  adaptorReportDao.getAdaptorReports();
-
-        Workbook workbook = new XSSFWorkbook();
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        Sheet sheet = workbook.createSheet("Adapter Reports");
-
-        int rowIndex = 0;
-
-        for (AdaptorReport adaptorReport : adaptorReportList) {
-
-            Row row = sheet.createRow(rowIndex++);
-
-            Cell arId = row.createCell(0); arId.setCellValue(adaptorReport.getArId());
-            Cell feedType = row.createCell(1); feedType.setCellValue(adaptorReport.getFeedType());
-            Cell reportType = row.createCell(2); reportType.setCellValue(adaptorReport.getReportType());
-            Cell createdDateTime = row.createCell(3); createdDateTime.setCellValue(adaptorReport.getCreatedDateTime());
-        }
-
-        workbook.write(out);
-
+        ByteArrayOutputStream out = ExcelManager.writeToExcel("Adapter Reports", adaptorReportList);
         Response.ResponseBuilder response = Response.ok(out.toByteArray());
         response.header("Content-Disposition", "attachment; filename=adapter_reports.xlsx");
         response.header("Content-Type","application/vnd.ms-excel");

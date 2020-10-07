@@ -63,5 +63,4 @@ public class NotificationsReportsApplication extends Application<NotificationRep
         environment.jersey().register(new DataRetentionStatisticsResource(dataRetentionStatisticsDao));
         environment.jersey().register(new ReportMasterResource(reportMasterDao));
     }
-
 }

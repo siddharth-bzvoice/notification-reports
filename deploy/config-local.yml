@@ -29,6 +29,5 @@ database:
     charSet: UTF-8
     hibernate.show_sql: true
     hibernate.generate_statistics: false
-    hibernate.current_session_context_class: thread
 swagger:
   resourcePackage: com.bazaarvoice.resources
