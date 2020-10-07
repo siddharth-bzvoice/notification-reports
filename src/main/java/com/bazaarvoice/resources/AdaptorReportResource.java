@@ -82,14 +82,10 @@ public class AdaptorReportResource {
 
             Row row = sheet.createRow(rowIndex++);
 
-            Cell arId = row.createCell(0);
-            arId.setCellValue(adaptorReport.getArId());
-            Cell feedType = row.createCell(1);
-            feedType.setCellValue(adaptorReport.getFeedType());
-            Cell reportType = row.createCell(2);
-            reportType.setCellValue(adaptorReport.getReportType());
-            Cell createdDateTime = row.createCell(3);
-            createdDateTime.setCellValue(adaptorReport.getCreatedDateTime());
+            Cell arId = row.createCell(0); arId.setCellValue(adaptorReport.getArId());
+            Cell feedType = row.createCell(1); feedType.setCellValue(adaptorReport.getFeedType());
+            Cell reportType = row.createCell(2); reportType.setCellValue(adaptorReport.getReportType());
+            Cell createdDateTime = row.createCell(3); createdDateTime.setCellValue(adaptorReport.getCreatedDateTime());
         }
 
         workbook.write(out);
