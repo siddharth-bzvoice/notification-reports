@@ -26,16 +26,7 @@ public class DataRetentionStatisticsResource {
     public DataRetentionStatisticsResource(DataRetentionStatisticsDao dataRetentionStatisticsDao) {
         this.dataRetentionStatisticsDao = dataRetentionStatisticsDao;
     }
-
-    @POST
-    @UnitOfWork
-    @Timed
-    @ApiOperation("Create data retention statistics")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void createDataRetentionStatistics(@Valid @NotNull DataRetentionStatistics dataRetentionStatistics){
-        dataRetentionStatisticsDao.create(dataRetentionStatistics);
-    }
-
+    
     @GET
     @Path("/{id}")
     @UnitOfWork
