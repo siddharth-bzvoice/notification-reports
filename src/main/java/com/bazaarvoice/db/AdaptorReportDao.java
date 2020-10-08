@@ -19,7 +19,7 @@ public class AdaptorReportDao extends AbstractDAO<AdaptorReport> {
 
     @SuppressWarnings("unchecked")
     public List<AdaptorReport> getAdaptorReports(){
-        return list((Query<AdaptorReport>) namedQuery("get_adapter_reports"));
+        return list((Query<AdaptorReport>) namedQuery("com.bazaarvoice.models.AdapterReport.findAll"));
     }
 
     public void create(AdaptorReport adaptorReport){

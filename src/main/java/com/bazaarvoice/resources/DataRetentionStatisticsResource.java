@@ -2,7 +2,7 @@ package com.bazaarvoice.resources;
 
 import com.bazaarvoice.db.DataRetentionStatisticsDao;
 import com.bazaarvoice.models.DataRetentionStatistics;
-import com.bazaarvoice.service.ExcelManager;
+import com.bazaarvoice.services.ExcelManager;
 import com.codahale.metrics.annotation.Timed;
 import io.dropwizard.hibernate.UnitOfWork;
 import io.swagger.annotations.Api;
@@ -27,6 +27,15 @@ public class DataRetentionStatisticsResource {
         this.dataRetentionStatisticsDao = dataRetentionStatisticsDao;
     }
 
+    @POST
+    @UnitOfWork
+    @Timed
+    @ApiOperation("Create data retention statistics")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void createDataRetentionStatistics(@Valid @NotNull DataRetentionStatistics dataRetentionStatistics){
+        dataRetentionStatisticsDao.create(dataRetentionStatistics);
+    }
+
     @GET
     @Path("/{id}")
     @UnitOfWork
@@ -34,7 +43,6 @@ public class DataRetentionStatisticsResource {
     @ApiOperation("Get data retention statistics report")
     @Produces(MediaType.APPLICATION_JSON)
     public DataRetentionStatistics findDataRetentionStatistics(@PathParam("id") String id){
-
         return this.dataRetentionStatisticsDao.findById(id);
     }
 
@@ -53,15 +61,6 @@ public class DataRetentionStatisticsResource {
             dataRetentionStatisticsList = dataRetentionStatisticsDao.getDataRetentionStatisticsByClientName(clientname.get());
         }
         return dataRetentionStatisticsList;
-    }
-
-    @POST
-    @UnitOfWork
-    @Timed
-    @ApiOperation("Create data retention statistics")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void createDataRetentionStatistics(@Valid @NotNull DataRetentionStatistics dataRetentionStatistics){
-        dataRetentionStatisticsDao.create(dataRetentionStatistics);
     }
 
     @GET

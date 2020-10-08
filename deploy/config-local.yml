@@ -1,7 +1,7 @@
 logging:
   level: INFO
   loggers:
-    com.employee.webservice: DEBUG
+    com.bazaarvoice: DEBUG
 server:
   applicationConnectors:
     - type: http

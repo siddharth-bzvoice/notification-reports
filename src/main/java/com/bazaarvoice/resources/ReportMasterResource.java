@@ -1,16 +1,12 @@
 package com.bazaarvoice.resources;
 
-import com.bazaarvoice.db.DataRetentionStatisticsDao;
 import com.bazaarvoice.db.ReportMasterDao;
-import com.bazaarvoice.models.DataRetentionStatistics;
 import com.bazaarvoice.models.ReportMaster;
 import com.codahale.metrics.annotation.Timed;
 import io.dropwizard.hibernate.UnitOfWork;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;

@@ -2,18 +2,13 @@ package com.bazaarvoice.resources;
 
 import com.bazaarvoice.db.AdaptorReportDao;
 import com.bazaarvoice.models.AdaptorReport;
-import com.bazaarvoice.service.ExcelManager;
 import com.codahale.metrics.annotation.Timed;
 import io.dropwizard.hibernate.UnitOfWork;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import java.io.*;
 import java.util.List;
 
 @Path("/adaptor-report")

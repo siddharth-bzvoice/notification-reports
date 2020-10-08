@@ -1,10 +1,12 @@
-package com.bazaarvoice;
+package com.bazaarvoice.services;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.lang.reflect.Field;
@@ -16,6 +18,8 @@ import java.util.Date;
 import java.util.List;
 
 public class ExcelManager {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ExcelManager.class);
 
     public static Workbook getWorkbook(){
         return new XSSFWorkbook();

@@ -5,6 +5,7 @@ import java.util.Date;
 
 @Entity
 @Table
+@NamedQueries({@NamedQuery(name="com.bazaarvoice.models.ReportMaster.findAll", query="select e from ReportMaster e")})
 public class ReportMaster {
 
     @Id

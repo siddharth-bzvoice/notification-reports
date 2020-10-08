@@ -19,13 +19,13 @@ public class DataRetentionStatisticsDao extends AbstractDAO<DataRetentionStatist
 
     @SuppressWarnings("unchecked")
     public List<DataRetentionStatistics> getDataRetentionStatistics(){
-        return list((Query<DataRetentionStatistics>) namedQuery("get_data_retention_statistics"));
+        return list((Query<DataRetentionStatistics>) namedQuery("com.bazaarvoice.models.DataRetentionStatistics.findAll"));
     }
 
     @SuppressWarnings("unchecked")
     public List<DataRetentionStatistics> getDataRetentionStatisticsByClientName(String clientname){
         return list((Query<DataRetentionStatistics>)
-        namedQuery("get_data_retention_statistics_by_clientname").setParameter("clientname", clientname));
+        namedQuery("com.bazaarvoice.models.DataRetentionStatistics.findByClientName").setParameter("clientname", clientname));
     }
 
     public void create(DataRetentionStatistics dataRetentionStatistics){

@@ -5,9 +5,9 @@ import javax.persistence.*;
 @Entity
 @Table
 @NamedQueries({
-@NamedQuery(name="get_data_retention_statistics",
+@NamedQuery(name="com.bazaarvoice.models.DataRetentionStatistics.findAll",
 query="select e from DataRetentionStatistics e"),
-@NamedQuery(name = "get_data_retention_statistics_by_clientname",
+@NamedQuery(name = "com.bazaarvoice.models.DataRetentionStatistics.findByClientName",
 query="select e from DataRetentionStatistics e where e.clientName = :clientname")})
 public class DataRetentionStatistics {
 

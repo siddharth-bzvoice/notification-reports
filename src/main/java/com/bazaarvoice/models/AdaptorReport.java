@@ -5,7 +5,7 @@ import java.util.Date;
 
 @Entity
 @Table
-@NamedQueries({@NamedQuery(name="get_adapter_reports", query="select e from AdaptorReport e")})
+@NamedQueries({@NamedQuery(name="com.bazaarvoice.models.AdapterReport.findAll", query="select e from AdaptorReport e")})
 public class AdaptorReport {
 
     @Id
