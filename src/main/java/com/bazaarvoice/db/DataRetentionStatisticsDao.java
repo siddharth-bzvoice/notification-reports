@@ -27,9 +27,5 @@ public class DataRetentionStatisticsDao extends AbstractDAO<DataRetentionStatist
         return list((Query<DataRetentionStatistics>)
         namedQuery("com.bazaarvoice.models.DataRetentionStatistics.findByClientName").setParameter("clientname", clientname));
     }
-
-    public void create(DataRetentionStatistics dataRetentionStatistics){
-        currentSession().save(dataRetentionStatistics);
-    }
 }
 

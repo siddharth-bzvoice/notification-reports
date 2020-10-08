@@ -9,20 +9,16 @@ import java.util.List;
 
 public class ReportMasterDao extends AbstractDAO<ReportMaster> {
 
-    public ReportMasterDao(SessionFactory sessionFactory){
+    public ReportMasterDao(SessionFactory sessionFactory) {
         super(sessionFactory);
     }
 
-    public ReportMaster findById(String arId){
+    public ReportMaster findById(String arId) {
         return get(arId);
     }
 
     @SuppressWarnings("unchecked")
-    public List<ReportMaster> getReportMasters(){
+    public List<ReportMaster> getReportMasters() {
         return list((Query<ReportMaster>) namedQuery("com.bazaarvoice.models.ReportMaster.findAll"));
-    }
-
-    public void create(ReportMaster reportMaster){
-        currentSession().save(reportMaster);
     }
 }

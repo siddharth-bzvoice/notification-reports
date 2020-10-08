@@ -26,7 +26,7 @@ public class DataRetentionStatisticsResource {
     public DataRetentionStatisticsResource(DataRetentionStatisticsDao dataRetentionStatisticsDao) {
         this.dataRetentionStatisticsDao = dataRetentionStatisticsDao;
     }
-    
+
     @GET
     @Path("/{id}")
     @UnitOfWork

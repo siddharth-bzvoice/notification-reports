@@ -21,8 +21,4 @@ public class AdaptorReportDao extends AbstractDAO<AdaptorReport> {
     public List<AdaptorReport> getAdaptorReports(){
         return list((Query<AdaptorReport>) namedQuery("com.bazaarvoice.models.AdapterReport.findAll"));
     }
-
-    public void create(AdaptorReport adaptorReport){
-        currentSession().save(adaptorReport);
-    }
 }
