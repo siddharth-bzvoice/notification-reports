@@ -19,7 +19,7 @@ public class ReportMasterDao extends AbstractDAO<ReportMaster> {
 
     @SuppressWarnings("unchecked")
     public List<ReportMaster> getReportMasters(){
-        return list((Query<ReportMaster>) namedQuery("get_adapter_reports"));
+        return list((Query<ReportMaster>) namedQuery("com.bazaarvoice.models.ReportMaster.findAll"));
     }
 
     public void create(ReportMaster reportMaster){
