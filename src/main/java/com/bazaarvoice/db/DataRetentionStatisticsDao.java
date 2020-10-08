@@ -22,6 +22,12 @@ public class DataRetentionStatisticsDao extends AbstractDAO<DataRetentionStatist
         return list((Query<DataRetentionStatistics>) namedQuery("get_data_retention_statistics"));
     }
 
+    @SuppressWarnings("unchecked")
+    public List<DataRetentionStatistics> getDataRetentionStatisticsByClientName(String clientname){
+        return list((Query<DataRetentionStatistics>)
+        namedQuery("get_data_retention_statistics_by_clientname").setParameter("clientname", clientname));
+    }
+
     public void create(DataRetentionStatistics dataRetentionStatistics){
         currentSession().save(dataRetentionStatistics);
     }

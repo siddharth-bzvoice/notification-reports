@@ -4,6 +4,11 @@ import javax.persistence.*;
 
 @Entity
 @Table
+@NamedQueries({
+@NamedQuery(name="get_data_retention_statistics",
+query="select e from DataRetentionStatistics e"),
+@NamedQuery(name = "get_data_retention_statistics_by_clientname",
+query="select e from DataRetentionStatistics e where e.clientName = :clientname")})
 public class DataRetentionStatistics {
 
     @Id
