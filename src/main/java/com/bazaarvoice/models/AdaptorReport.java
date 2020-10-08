@@ -9,25 +9,26 @@ import java.util.Date;
 public class AdaptorReport {
 
     @Id
-    private String arId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long arId;
     private String feedType;
     private String reportType;
     private Date createdDateTime;
 
     public AdaptorReport() {}
 
-    public AdaptorReport(String arId, String feedType, String reportType, Date createdDateTime) {
+    public AdaptorReport(int arId, String feedType, String reportType, Date createdDateTime) {
         this.arId = arId;
         this.feedType = feedType;
         this.reportType = reportType;
         this.createdDateTime = createdDateTime;
     }
 
-    public String getArId() {
+    public long getArId() {
         return arId;
     }
 
-    public void setArId(String arId) {
+    public void setArId(long arId) {
         this.arId = arId;
     }
 
@@ -55,14 +56,5 @@ public class AdaptorReport {
         this.createdDateTime = createdDateTime;
     }
 
-    @Override
-    public String toString() {
-        return "AdaptorReport{" +
-                "arId='" + arId + '\'' +
-                ", feedType='" + feedType + '\'' +
-                ", reportType='" + reportType + '\'' +
-                ", createdDateTime=" + createdDateTime +
-                '}';
-    }
 }
 

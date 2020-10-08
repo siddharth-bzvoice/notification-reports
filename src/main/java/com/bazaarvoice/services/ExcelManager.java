@@ -1,4 +1,4 @@
-package com.bazaarvoice.service;
+package com.bazaarvoice;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;

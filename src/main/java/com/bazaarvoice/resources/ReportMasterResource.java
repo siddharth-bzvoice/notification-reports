@@ -44,11 +44,4 @@ public class ReportMasterResource {
         return this.reportMasterDao.getReportMasters();
     }
 
-    @POST
-    @UnitOfWork
-    @Timed
-    @ApiOperation("Create report master")
-    public void createReportMaster(@Valid @NotNull ReportMaster reportMaster){
-        reportMasterDao.create(reportMaster);
-    }
 }

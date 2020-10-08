@@ -1,8 +1,6 @@
 package com.bazaarvoice.resources;
 
-import com.bazaarvoice.db.AdaptorReportDao;
 import com.bazaarvoice.db.DataRetentionStatisticsDao;
-import com.bazaarvoice.models.AdaptorReport;
 import com.bazaarvoice.models.DataRetentionStatistics;
 import com.bazaarvoice.service.ExcelManager;
 import com.codahale.metrics.annotation.Timed;
@@ -16,12 +14,11 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @Path("/data-retention")
 @Api("/data-retention")
-@Produces(MediaType.APPLICATION_JSON)
 public class DataRetentionStatisticsResource {
 
     private final DataRetentionStatisticsDao dataRetentionStatisticsDao;
@@ -35,7 +32,9 @@ public class DataRetentionStatisticsResource {
     @UnitOfWork
     @Timed
     @ApiOperation("Get data retention statistics report")
+    @Produces(MediaType.APPLICATION_JSON)
     public DataRetentionStatistics findDataRetentionStatistics(@PathParam("id") String id){
+
         return this.dataRetentionStatisticsDao.findById(id);
     }
 
@@ -43,24 +42,24 @@ public class DataRetentionStatisticsResource {
     @UnitOfWork
     @Timed
     @ApiOperation("Get all data retention statistics")
-    @Path("/all")
-    public List<DataRetentionStatistics> getDataRetentionStatistics(){
-        return dataRetentionStatisticsDao.getDataRetentionStatistics();
-    }
-
-    @GET
-    @UnitOfWork
-    @Timed
-    @ApiOperation("Get all data retention statistics")
-    @Path("/all/{clientname}")
-    public List<DataRetentionStatistics> getDataRetentionStatisticsFiltered(@PathParam("clientname") String clientname){
-        return dataRetentionStatisticsDao.getDataRetentionStatisticsByClientName(clientname);
+    @Path("/statistics")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<DataRetentionStatistics> getDataRetentionStatisticsFiltered(@QueryParam("clientname") Optional<String> clientname){
+        List<DataRetentionStatistics> dataRetentionStatisticsList = null;
+        if(!clientname.isPresent()){
+            dataRetentionStatisticsList =  dataRetentionStatisticsDao.getDataRetentionStatistics();
+        }
+        else {
+            dataRetentionStatisticsList = dataRetentionStatisticsDao.getDataRetentionStatisticsByClientName(clientname.get());
+        }
+        return dataRetentionStatisticsList;
     }
 
     @POST
     @UnitOfWork
     @Timed
     @ApiOperation("Create data retention statistics")
+    @Consumes(MediaType.APPLICATION_JSON)
     public void createDataRetentionStatistics(@Valid @NotNull DataRetentionStatistics dataRetentionStatistics){
         dataRetentionStatisticsDao.create(dataRetentionStatistics);
     }
@@ -68,26 +67,17 @@ public class DataRetentionStatisticsResource {
     @GET
     @UnitOfWork
     @Timed
-    @Path("/downloadxls")
+    @Path("/statistics/downloadxls")
     @Produces("application/vnd.ms-excel")
-    @ApiOperation("Download adaptor reports as excel")
-    public Response downloadXLS() throws IOException {
-        List<DataRetentionStatistics> dataRetentionStatisticsList =  dataRetentionStatisticsDao.getDataRetentionStatistics();
-        ByteArrayOutputStream out = ExcelManager.writeToExcel("Data Retention Statistics", dataRetentionStatisticsList);
-        Response.ResponseBuilder response = Response.ok(out.toByteArray());
-        response.header("Content-Disposition", "attachment; filename=adapter_reports.xlsx");
-        response.header("Content-Type","application/vnd.ms-excel");
-        return response.build();
-    }
-
-    @GET
-    @UnitOfWork
-    @Timed
-    @Path("/downloadxls/{clientname}")
-    @Produces("application/vnd.ms-excel")
-    @ApiOperation("Download adaptor reports as excel")
-    public Response downloadXLSFiltered() throws IOException {
-        List<DataRetentionStatistics> dataRetentionStatisticsList =  dataRetentionStatisticsDao.getDataRetentionStatistics();
+    @ApiOperation("Download data retention statistics reports as excel")
+    public Response downloadXLSFiltered(@QueryParam("clientname") Optional<String> clientname) {
+        List<DataRetentionStatistics> dataRetentionStatisticsList = null;
+        if(!clientname.isPresent()){
+            dataRetentionStatisticsList =  dataRetentionStatisticsDao.getDataRetentionStatistics();
+        }
+        else {
+            dataRetentionStatisticsList = dataRetentionStatisticsDao.getDataRetentionStatisticsByClientName(clientname.get());
+        }
         ByteArrayOutputStream out = ExcelManager.writeToExcel("Data Retention Statistics", dataRetentionStatisticsList);
         Response.ResponseBuilder response = Response.ok(out.toByteArray());
         response.header("Content-Disposition", "attachment; filename=data_retention_statistics.xlsx");

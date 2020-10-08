@@ -1,32 +1,33 @@
 package com.bazaarvoice.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Table
 public class ReportMaster {
 
     @Id
-    private String reportId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long reportId;
     private String reportType;
     private String reportDesc;
     private Date createdDateTime;
 
     public ReportMaster(){}
 
-    public ReportMaster(String reportId, String reportType, String reportDesc, Date createdDateTime) {
+    public ReportMaster(long reportId, String reportType, String reportDesc, Date createdDateTime) {
         this.reportId = reportId;
         this.reportType = reportType;
         this.reportDesc = reportDesc;
         this.createdDateTime = createdDateTime;
     }
 
-    public String getReportId() {
+    public long getReportId() {
         return reportId;
     }
 
-    public void setReportId(String reportId) {
+    public void setReportId(long reportId) {
         this.reportId = reportId;
     }
 

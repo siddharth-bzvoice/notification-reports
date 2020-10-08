@@ -46,29 +46,4 @@ public class AdaptorReportResource {
         return adaptorReportDao.getAdaptorReports();
     }
 
-    @POST
-    @UnitOfWork
-    @Timed
-    @ApiOperation("Create adaptor report")
-    @Produces(MediaType.APPLICATION_JSON)
-    public void createAdaptorReport(@Valid @NotNull AdaptorReport adaptorReport){
-        adaptorReportDao.create(adaptorReport);
-    }
-
-    @GET
-    @UnitOfWork
-    @Timed
-    @Path("/downloadxls")
-    @Produces("application/vnd.ms-excel")
-    @ApiOperation("Download adaptor reports as excel")
-    public Response downloadXLS() throws IOException {
-
-        List<AdaptorReport> adaptorReportList =  adaptorReportDao.getAdaptorReports();
-        ByteArrayOutputStream out = ExcelManager.writeToExcel("Adapter Reports", adaptorReportList);
-        Response.ResponseBuilder response = Response.ok(out.toByteArray());
-        response.header("Content-Disposition", "attachment; filename=adapter_reports.xlsx");
-        response.header("Content-Type","application/vnd.ms-excel");
-        return response.build();
-
-    }
 }

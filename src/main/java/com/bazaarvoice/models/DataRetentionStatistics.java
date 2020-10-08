@@ -14,7 +14,6 @@ public class DataRetentionStatistics {
     @Id
     private String jobId;
     private String jobStatus;
-    private String runningTime;
     private long purgedEventCount;
     private long purgedCorrespondencesCount;
     private String clientName;
@@ -27,7 +26,6 @@ public class DataRetentionStatistics {
     public DataRetentionStatistics(
             String jobId,
             String jobStatus,
-            String runningTime,
             long purgedEventCount,
             long purgedCorrespondencesCount,
             String clientName,
@@ -35,7 +33,6 @@ public class DataRetentionStatistics {
             String runningDate) {
         this.jobId = jobId;
         this.jobStatus = jobStatus;
-        this.runningTime = runningTime;
         this.purgedEventCount = purgedEventCount;
         this.purgedCorrespondencesCount = purgedCorrespondencesCount;
         this.clientName = clientName;
@@ -57,14 +54,6 @@ public class DataRetentionStatistics {
 
     public void setJobStatus(String jobStatus) {
         this.jobStatus = jobStatus;
-    }
-
-    public String getRunningTime() {
-        return runningTime;
-    }
-
-    public void setRunningTime(String runningTime) {
-        this.runningTime = runningTime;
     }
 
     public long getPurgedEventCount() {
@@ -106,5 +95,6 @@ public class DataRetentionStatistics {
     public void setRunningDate(String runningDate) {
         this.runningDate = runningDate;
     }
+
 
 }
